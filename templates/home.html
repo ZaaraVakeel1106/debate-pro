@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DebatePro</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar d-flex justify-content-between align-items-center px-4">
+    <span class="navbar-brand">DebatePro</span>
+
+    <div>
+        <a href="/login" class="btn btn-primary">Login</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-section">
+
+<div class="container hero">
+
+    <div class="row align-items-center">
+
+        <!-- TEXT -->
+        <div class="col-md-6 text-start">
+            <h1 class="hero-title">Manage Debates Effortlessly</h1>
+
+            <p class="mt-3 hero-subtext">
+               Run structured, fair, and efficient debate tournaments with smart match handling and seamless scoring.
+            </p>
+
+            <a href="/login" class="btn btn-primary mt-3 px-4 py-2">
+                Get Started
+            </a>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="col-md-6 text-center">
+            <img class="hero-img" src="{{ url_for('static', filename='debate.jpg') }}">
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">Features</h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-4">
+            <div class="card feature-card">
+                <h5>Team Management</h5>
+                <p>Create and manage teams easily.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card feature-card">
+                <h5>Automated Matches</h5>
+                <p>Generate fair debate matchups instantly.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card feature-card">
+                <h5>Live Scoring</h5>
+                <p>Judges can submit scores in real-time.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- TEAM -->
+<div class="container team mt-5">
+
+    <h2 class="mb-4 text-center">Meet the Developers</h2>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-2 member">Zaara Vakeel</div>
+        <div class="col-md-2 member">Divisha Gupta</div>
+        <div class="col-md-2 member">Gaurangi Agarwal</div>
+        <div class="col-md-2 member">Kashvi Gupta</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bracket</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .bracket {
+            display: flex;
+            gap: 80px;
+            padding: 20px;
+        }
+
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .round-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .match {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 30px 0;
+            width: 180px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .team {
+            padding: 5px;
+        }
+
+        .winner {
+            font-weight: bold;
+            color: green;
+        }
+
+        .champion-box {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff9e6;
+            border: 2px solid gold;
+            text-align: center;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand">Bracket</a>
+    </div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="mb-4">DebatePro</h4>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/admin">Admin</a>
+    <a href="/judge">Judge</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/bracket">Bracket</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<h2 class="mb-4">🏆 Tournament Bracket</h2>
+
+<div class="bracket">
+
+{% for round in bracket %}
+<div class="round">
+
+    <div class="round-title">Round {{ loop.index }}</div>
+
+    {% for m in round %}
+    <div class="match">
+
+        <div class="team {% if m.winner == m.team1 %}winner{% endif %}">
+            {{ m.team1 }}
+        </div>
+
+        <div class="team {% if m.winner == m.team2 %}winner{% endif %}">
+            {{ m.team2 }}
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ✅ FINAL WINNER BLOCK -->
+{% if final_winner %}
+<div class="champion-box">
+    <h4>🏆 Champion</h4>
+    <h2 class="text-success">{{ final_winner }}</h2>
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>

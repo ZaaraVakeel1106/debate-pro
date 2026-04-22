@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand">Leaderboard</a>
+    </div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="mb-4">DebatePro</h4>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/admin">Admin</a>
+    <a href="/judge">Judge</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/bracket">Bracket</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<h2 class="mb-4">🏆 Leaderboard</h2>
+{% if winner %}
+<div class="card text-center mb-4">
+    <h2>🏆 Winner: {{ winner }}</h2>
+</div>
+{% endif %}
+<!-- TABLE -->
+<div class="card">
+
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ row[0] }}</td>
+
+            <!-- SAFE: works for both leaderboard types -->
+            <td>{{ row[1] if row|length > 2 else 0 }}</td>
+            <td>
+                <strong>
+                    {{ row[2] if row|length > 2 else row[1] }}
+                </strong>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+</div>
+
+<!-- CHART -->
+<div class="card mt-4">
+    <h5>Performance Chart</h5>
+    <canvas id="chart"></canvas>
+</div>
+
+</div>
+
+<script>
+
+let raw = JSON.parse('{{ data | tojson | safe }}');
+
+// 🔥 SAFE DATA HANDLING
+let labels = raw.map(x => x[0]);
+
+let scores = raw.map(x => {
+    if (x.length > 2) return x[2]; // advanced leaderboard
+    return x[1]; // basic leaderboard
+});
+
+// 🔥 PREVENT EMPTY ERROR
+if (labels.length > 0) {
+
+    new Chart(document.getElementById("chart"), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Scores',
+                data: scores,
+                backgroundColor: '#6366f1'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+}
+
+</script>
+
+</body>
+</html>

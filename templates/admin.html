@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand">DebatePro Admin</a>
+    </div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="mb-4">DebatePro</h4>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/admin">Admin</a>
+    <a href="/judge">Judge</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/bracket">Bracket</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<h2>Admin Panel</h2>
+
+<div class="row mt-4">
+
+    <!-- ADD USER -->
+    <div class="col-md-4">
+        <div class="card">
+            <h5>Add User</h5>
+            <form action="/add_user" method="post">
+                <input name="username" class="form-control mb-2" placeholder="Username">
+                <input name="password" class="form-control mb-2" placeholder="Password">
+                <select name="role" class="form-control mb-2">
+                    <option>admin</option>
+                    <option>judge</option>
+                    <option>participant</option>
+                </select>
+                <button class="btn btn-primary w-100">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD TEAM -->
+    <div class="col-md-4">
+        <div class="card">
+            <h5>Add Team</h5>
+            <form action="/add_team" method="post">
+                <input name="team" class="form-control mb-2" placeholder="Team Name">
+                <button class="btn btn-success w-100">Add Team</button>
+            </form>
+        </div>
+    </div>
+
+   
+
+</div>
+
+<hr>
+
+<!-- GENERATE MATCHES -->
+<!-- GENERATE MATCHES -->
+<div class="card mt-4">
+    <h5>Generate Matches</h5>
+
+  <form action="/generate_matches" method="post">
+
+    <label>Round Name</label>
+    <input name="round_name" class="form-control mb-2" placeholder="Round 1">
+
+    <label>Motion</label>
+    <input name="motion" class="form-control mb-3" placeholder="Enter debate motion">
+
+    <p class="text-muted">
+        This will create the first round and generate matches automatically.
+    </p>
+
+    <button class="btn btn-primary w-100">
+        Start Tournament
+    </button>
+
+</form>
+</div>
+<div class="card mt-4">
+    <h5>Reset Tournament</h5>
+
+    <p class="text-muted">
+        This will delete all matches and rounds and restart the tournament.
+    </p>
+
+    <a href="/reset_tournament" class="btn btn-danger w-100">
+        Reset Tournament
+    </a>
+</div>
+<hr>
+
+<!-- TEAMS LIST -->
+<div class="card mt-4">
+    <h5>Teams</h5>
+    <p class="text-muted">Total Teams: {{ teams|length }}</p>
+    <ul class="list-group">
+        {% for t in teams %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{ t[1] }}
+
+    <a href="/delete_team/{{ t[0] }}" class="btn btn-sm btn-danger">
+        Delete
+    </a>
+</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</div>
+
+</body>
+</html>

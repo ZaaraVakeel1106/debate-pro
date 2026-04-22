@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4 class="mb-4">DebatePro</h4>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/admin">Admin</a>
+    <a href="/judge">Judge</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/bracket">Bracket</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <h2>Dashboard</h2>
+
+    <!-- WELCOME -->
+    <div class="card mt-4">
+        <h4>Welcome Back 👋</h4>
+        <p>Manage debates, matches, and scoring from one place.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+            <div class="card text-center">
+                <h5>Total Teams</h5>
+                <h2>{{ stats.teams }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center">
+                <h5>Total Matches</h5>
+                <h2>{{ stats.matches }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center">
+                <h5>Completed Matches</h5>
+                <h2>{{ stats.completed }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ROUNDS -->
+    <div class="card mt-4">
+        <h5>Rounds</h5>
+
+        <ul class="list-group">
+            {% for r in rounds %}
+            <li class="list-group-item">
+                <strong>{{ r[1] }}</strong> — {{ r[2] }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- MATCHES -->
+    <div class="card mt-4">
+        <h5>Recent Matches</h5>
+
+        <ul class="list-group">
+            {% for m in matches %}
+            <li class="list-group-item">
+                {{ m[1] }} vs {{ m[2] }} 
+                <span class="float-end">
+                    {{ m[5] or 0 }} - {{ m[6] or 0 }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
