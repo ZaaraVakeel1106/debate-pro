@@ -1,11 +1,11 @@
-# 🏆 Debate Tournament Manager
+# Debate Tournament Manager
 
 A web-based system to manage debate tournaments efficiently.  
 Built using Flask and SQLite.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Team registration
 - Automated match generation
@@ -17,7 +17,7 @@ Built using Flask and SQLite.
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 1. Add teams from Admin panel  
 2. Start tournament (Round 1 generated automatically)  
@@ -28,7 +28,7 @@ Built using Flask and SQLite.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Python (Flask)
 - SQLite
@@ -36,7 +36,7 @@ Built using Flask and SQLite.
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 ```bash
 pip install -r requirements.txt
